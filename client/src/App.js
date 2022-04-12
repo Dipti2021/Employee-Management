@@ -1,0 +1,39 @@
+// import logo from "./logo.svg";
+import styled from "styled-components";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import LandingPage from "./components/LandingPage";
+// import Header from "../src/components/Header";
+// import Footer from "../src/components/Footer";
+import Employees from "./components/employees/Employees";
+import AdminLogin from "./components/AdminLogin";
+import Showemployee from "./components/employees/Showemployees";
+// import GlobalStyles from "./components/GlobalStyles";
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* <GlobalStyles /> */}
+      {/* <Header /> */}
+      <Switch>
+        <Route exact path="/login">
+          <AdminLogin />
+        </Route>
+
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+
+        <Route path="/employees">
+          <Employees />
+        </Route>
+        <Route path="/showemployees">
+          <Showemployee />
+        </Route>
+      </Switch>
+      {/* <Footer /> */}"
+    </BrowserRouter>
+  );
+}
+
+export default App;
