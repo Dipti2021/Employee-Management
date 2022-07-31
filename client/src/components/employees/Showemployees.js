@@ -3,12 +3,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import PageWrapper from "../PageWrapper";
 import Header from "../Header";
-import Footer from "../Footer";
+
 import axios from "axios";
 // import GlobalStyles from "../GlobalStyles";
 
 const Showemployee = () => {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState([]); //empty array to store the data
+  //useState is a hook that allows us to use state in a functional component.
+  //employees is the state and setEmployees is the function that allows us to change the state.
 
   const [employee, setEmployee] = useState({
     employeeID: "",
@@ -39,41 +41,45 @@ const Showemployee = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.employeeID}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.phone}</td>
-                <td>{employee.address}</td>
-                <td>{employee.title}</td>
-                <td>
-                  <Button
-                    onClick={() => {
-                      setIsEdit(true);
-                      setIsAdd(false);
-                      setIsDelete(false);
-                      setEmployee(employee);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      setIsDelete(true);
-                      setIsAdd(false);
-                      setIsEdit(false);
-                      setEmployee(employee);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
+            {employees.map(
+              (
+                employee //map through the employees array and return the employee
+              ) => (
+                <tr key={employee._id}>
+                  {/* key is a unique identifier for each employee */}
+                  <td>{employee.employeeID}</td>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
+                  <td>{employee.phone}</td>
+                  <td>{employee.address}</td>
+                  <td>{employee.title}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        setIsEdit(true);
+                        setIsAdd(false);
+                        setIsDelete(false);
+                        setEmployee(employee);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setIsDelete(true);
+                        setIsAdd(false);
+                        setIsEdit(false);
+                        setEmployee(employee);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
-        <Footer />
       </PageWrapper>
     </>
   );

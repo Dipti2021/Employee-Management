@@ -1,25 +1,20 @@
-import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import PageWrapper from "./PageWrapper";
 import Header from "./Header";
-import Footer from "./Footer";
-import { keyframes } from "styled-components";
 
+//Landing Page Component
 const LandingPage = () => {
   return (
     <PageWrapper>
       <Header />
       <Container>
-        <h1>
-          <span>Welcome to Dipti's Employee Management System</span>
-        </h1>
-        <h2>A simple and easy way to manage your employees information.</h2>
-        <Nav>
-          <NavLink to="/employees">Know More..</NavLink>
-        </Nav>
+        <Heading>Welcome to Dipti's Employee Management System</Heading>
+
+        <Heading2>
+          A simple and easy way to manage your employees information.
+        </Heading2>
       </Container>
-      <Footer />
     </PageWrapper>
   );
 };
@@ -28,32 +23,31 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  color: beige;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  &:focus {
-    outline: blue;
-  }
+  margin-top: 100px;
 `;
 
-const Nav = styled.div`
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-around;
-  font-size: 25px;
+const Heading = styled.h1`
+  font-size: 3rem;
   font-weight: bold;
+  text-align: center;
   margin-top: 50px;
   margin-bottom: 50px;
-  a {
-    text-decoration: none;
-    color: black;
+  color: darkblue;
+
+  font-family: cursive;
+  @media (max-width: 768px) {
+    font-size: 2rem;
   }
+`;
+const Heading2 = styled.h2`
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: darkblue;
+  font-family: cursive;
 `;
 
 export default LandingPage;

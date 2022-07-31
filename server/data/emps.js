@@ -7,16 +7,18 @@ require("dotenv").config();
 const { MONGO_URI } = process.env;
 
 const options = {
-  useNewUrlParser: true,
+  useNewUrlParser: true, // remove these lines if having issue with mongoose
   useUnifiedTopology: true,
 };
 
 const viewEmployees = async (req, res) => {
-  const client = new MongoClient(MONGO_URI, options);
+  //view all employees
+  const client = new MongoClient(MONGO_URI, options); //connect to mongo
   const db = client.db("employee_1");
   try {
-    await client.connect();
+    await client.connect(); // async await is used to wait for the connection to be established
     const result = await db.collection("employee").find({}).toArray();
+    //find({}) is used to find all documents in the collection
     res.status(200).json({
       message: "Employees retrieved successfully",
       result,
@@ -33,7 +35,7 @@ const viewEmployees = async (req, res) => {
 const addEmployee = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const db = client.db("employee_1");
-  const { employeeID, firstName, lastName, address, phone, title } = req.body;
+  const { employeeID, firstName, lastName, address, phone, title } = req.body; //
   // const id = uuidv4();
 
   const employee = {

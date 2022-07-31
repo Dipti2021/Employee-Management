@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const PageWrapper = ({ children }) => {
+  //children is the content of the page that is being passed in as props from the parent component
   return <Wrapper>{children}</Wrapper>;
 };
 

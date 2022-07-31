@@ -3,13 +3,14 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import PageWrapper from "../PageWrapper";
 import Header from "../Header";
-import Footer from "../Footer";
+
 import axios from "axios";
 // import GlobalStyles from "../GlobalStyles";
 
 const Employees = () => {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState([]); // array of employees
   const [employee, setEmployee] = useState({
+    // employee object
     employeeID: "",
     firstName: "",
     lastName: "",
@@ -17,8 +18,8 @@ const Employees = () => {
     address: "",
     title: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // loading state
+  const [isError, setIsError] = useState(false); // error state
   const [isSuccess, setIsSuccess] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -28,16 +29,19 @@ const Employees = () => {
   const [isSearchFirstName, setIsSearchFirstName] = useState(false);
 
   const handleChange = (e) => {
+    // handle change in input fields
     setEmployee({
+      // set employee object
+      //...employee is a spread operator that copies the current employee object
       ...employee,
       [e.target.name]: e.target.value,
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoading(true); // set state  to loading will show loading spinner
     setIsError(false);
-    setIsSuccess(false);
+    setIsSuccess(false); // set state will show success message
     setIsEdit(false);
     setIsAdd(false);
     setIsDelete(false);
@@ -61,7 +65,8 @@ const Employees = () => {
   };
 
   const addEmployee = async (e) => {
-    e.preventDefault();
+    // add employee
+    e.preventDefault(); //prevent default will stop the form from submitting
     const newEmployee = {
       employeeID: employee.employeeID,
       firstName: employee.firstName,
@@ -74,16 +79,19 @@ const Employees = () => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
     };
+    //axios is a promise based HTTP client for the browser and node.js
     await axios
       .post("http://localhost:5000/employees", newEmployee, {
         headers: headers,
       })
       .then((res) => {
+        // if successful
         setIsLoading(false);
         setIsSuccess(true);
         setIsError(false);
 
         setEmployee({
+          // set employee object
           employeeID: "",
           firstName: "",
           lastName: "",
@@ -101,6 +109,7 @@ const Employees = () => {
       });
   };
 
+  //update employee will update employee and will show success message
   const updateEmployee = async (e) => {
     e.preventDefault();
     const updatedEmployee = {
@@ -147,6 +156,7 @@ const Employees = () => {
       });
   };
 
+  //delete employee will delete employee and will show success message
   const deleteEmployee = async (e) => {
     e.preventDefault();
     const headers = {
@@ -181,6 +191,8 @@ const Employees = () => {
         console.log(err);
       });
   };
+
+  //searchTitle will search employee by title and will show success message
 
   const searchTitle = async (e) => {
     e.preventDefault();
@@ -265,12 +277,13 @@ const Employees = () => {
       <Container>
         <h1>Add Employee</h1>
         <Form onSubmit={handleSubmit}>
+          {/* form on submit will call handleSubmit and will add employee */}
           <Input
             type="text"
             name="employeeID"
             placeholder="Employee ID"
             value={employee.employeeID}
-            onChange={handleChange}
+            onChange={handleChange} // handle change will update employee object
           />
           <Input
             type="text"
@@ -308,8 +321,10 @@ const Employees = () => {
             onChange={handleChange}
           />
           <Button type="submit">{isLoading ? "Loading..." : "Submit"}</Button>
+          {/* if isLoading is true then show loading else show submit */}
         </Form>
         {isSuccess && <p>Employee Added</p>}
+        {/* if isSuccess is true then show success message */}
         {isError && <p>Error</p>}
 
         {/* <Table>
@@ -359,7 +374,6 @@ const Employees = () => {
           </tbody>
         </Table> */}
       </Container>
-      <Footer />
     </PageWrapper>
   );
 };
