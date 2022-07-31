@@ -4,31 +4,44 @@ import styled from "styled-components";
 import PageWrapper from "./PageWrapper";
 // import Showemployee from "./employees/Showemployees";
 import Header from "./Header";
+import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 
 //create a signin component using uaername and password
 // signin pageis loaded when the button on the landing page is clicked
+//on clicking the login button, send the username and password to the server
+//if the username and password are correct, redirect to the employees page
+//if the username and password are incorrect, display an error message
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  //use useHistory to redirect to the employees page
+  let history = useHistory();
+
+  //usernamand password are hardcoded for now
+  //usrrname is Amit and password is 12345
+  //if the username and password are correct, redirect to the employees page
+  //if the username and password are incorrect, display an error message
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/login", {
-        username: username,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }; //end of handleSubmit
+    console.log("signin button clicked");
+    if (username === "Amit" && password === "12345") {
+      history.push("/employeepage");
+    }
+    if (username === "Amit" && password !== "12345") {
+      alert("password is incorrect");
+    }
+    if (username !== "Amit" && password === "12345") {
+      alert("username is incorrect");
+    }
+
+    //push to the employee page
+  };
+  //if the username and password are correct, redirect to the employees page
+
   return (
     <PageWrapper>
       <Header />
@@ -83,7 +96,8 @@ const Form = styled.div`
     }
     input {
       width: 100%;
-      height: 40px;
+      height: 70px;
+     font-size: 30px;
       border-radius: 10px;
       border: 1px solid black;
       margin-bottom: 10px;

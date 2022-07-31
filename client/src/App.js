@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import Employees from "./components/employees/Employees";
 import Signin from "./components/Signin";
 import Showemployee from "./components/employees/Showemployees";
+import EmployeePage from "./components/EmployeePage";
 // import GlobalStyles from "./components/GlobalStyles";
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path="/showemployees">
           <Showemployee />
+        </Route>
+        <Route path="/employeepage">
+          <EmployeePage />
         </Route>
       </Switch>
       {/* <Footer /> */}"
